@@ -3,8 +3,15 @@ import './App.css'
 import { Button, Row, Col } from 'reactstrap'
 
 class App extends Component {
-  state = {
-    clickerValue: 0
+  constructor(props) {
+    super(props)
+    this.state = {
+      clickerValue: 0
+    }
+
+    this.incrementClicker = this.incrementClicker.bind(this)
+    this.decrementClicker = this.decrementClicker.bind(this)
+    this.resetClicker = this.resetClicker.bind(this)
   }
 
   incrementClicker = () => {
@@ -16,7 +23,7 @@ class App extends Component {
   }
 
   resetClicker = () => {
-    this.setState((prevState) => ({clickerValue: 0}))
+    this.setState({clickerValue: 0})
   }
 
   render() {
@@ -39,13 +46,13 @@ class App extends Component {
           </Col>
           &nbsp; 
           <Col sm={{ size: 'auto', offset: 1 }}>
-            <Button onClick={this.decrementClicker} color="danger">Reduce</Button>
+            <Button onClick={this.decrementClicker} disabled={this.state.clickerValue === 0? true : false} color="danger">Reduce</Button>
           </Col>
         </Row>
         <br/>
         <Row>
           <Col sm={{ size: 1, offset: 5 }}>
-            <Button onClick={this.resetClicker} color="warning">Reset</Button>
+            <Button onClick={this.resetClicker} disabled={this.state.clickerValue === 0? true : false} color="warning">Reset</Button>
           </Col>
         </Row>
       </div>
